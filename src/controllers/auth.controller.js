@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid"
 import { db } from "../database/database.js"
 
 export async function signUp(req, res) {
-    const { name, email, password } = req.body
+    const { name, email, password, city, phone } = req.body
 
     try {
         const user = await db.query(`SELECT * FROM users WHERE email = $1;`, [email])
@@ -11,7 +11,7 @@ export async function signUp(req, res) {
 
         const hash = bcrypt.hashSync(password, 10)
 
-        await db.query(`INSERT INTO users (name, email, password) VALUES ($1, $2, $3);`, [name, email, hash])
+        await db.query(`INSERT INTO users (name, email, password, city, phone) VALUES ($1, $2, $3);`, [name, email, hash, city, phone])
         res.sendStatus(201)
     } catch (err) {
         return res.status(500).send(err.message)
