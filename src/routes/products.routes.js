@@ -9,3 +9,5 @@ const productsRouter = Router()
 productsRouter.post("/add-products", validateSchema(addProductSchema), authValidation, addProduct)
 productsRouter.get("/home", getProducts)
 productsRouter.get("/manage-products", manageProducts)
+
+export default productsRouter
