@@ -7,7 +7,7 @@ import { authValidation } from "../middlewares/auth.middleware.js"
 const productsRouter = Router()
 
 productsRouter.post("/add-products", validateSchema(addProductSchema), authValidation, addProduct)
-productsRouter.get("/home", getProducts)
-productsRouter.get("/manage-products", manageProducts)
+productsRouter.get("/home", authValidation, getProducts)
+productsRouter.get("/manage-products", authValidation, manageProducts)
 
 export default productsRouter

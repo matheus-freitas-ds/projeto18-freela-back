@@ -24,10 +24,10 @@ export async function getProducts(req, res) {
 }
 
 export async function manageProducts(req, res) {
-    const { id } = req.body
-
+    const { userId } = res.locals
+    
     try {
-        const yourProducts = await db.query(`SELECT * FROM products WHERE "userId" = $1;`, [id])
+        const yourProducts = await db.query(`SELECT * FROM products WHERE "userId" = $1;`, [userId])
 
         res.status(200).send(yourProducts.rows)
     } catch (err) {
